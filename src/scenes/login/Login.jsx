@@ -30,10 +30,13 @@ const Login = () => {
 
   const handleFormSubmit = (values) => {
     setLoading(true);
-    dispatch(LoginHandler(values));
-    if(Auth?.isAuth){
-     navigate("/");
-    }
+    dispatch(LoginHandler(values))
+    setTimeout(()=>{
+      if(Auth.isAuth){
+
+        navigate('/') 
+      }
+    },5000)
     // axiosInstance
     //   .post("/User/login", values)
     //   .then((res) => {

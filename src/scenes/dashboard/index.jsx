@@ -20,9 +20,6 @@ const Dashboard = () => {
       });
   }, []);
 
-  const state = useSelector((state) => state);
-  console.log('state',state)
-
   return (
     <Box m="20px">
       {/* HEADER */}
