@@ -7,9 +7,12 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Login from "./scenes/login/Login";
 import LoginProtected from "./components/LoginProtected";
 import { Toaster } from "react-hot-toast";
-import Form from "./scenes/form/index.jsx";
 import AddUser from "./components/AddUser";
 import Unauth from "./components/Unauth";
+import Role from "./components/Role";
+import AddCompany from "./components/AddCompany";
+import AddProject from "./components/AddProject";
+import AddModule from "./components/AddModule";
 
 
 
@@ -24,11 +27,15 @@ function App() {
           <Route element={<ProtectedRoutes allowedRoles={["admin"]} />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/team" element={<Team />} />
-            <Route path="/form" element={<Form />} />
+            <Route path="/addRole" element={<Role />} />
+            <Route path="/addUsers" element={<AddUser />} />
+            <Route path="/addCompany" element={<AddCompany />} />
+            <Route path="/addProject" element={<AddProject />} />
+            <Route path="/addModule" element={<AddModule />} />
+
           </Route>
 
-          <Route element={<ProtectedRoutes allowedRoles={["user"]}  />}>
-            <Route path="/addUsers" element={<AddUser />} />
+          <Route element={<ProtectedRoutes allowedRoles={["user"]} />}>
           </Route>
           <Route element={<LoginProtected />}>
             <Route path="/login" element={<Login />} />

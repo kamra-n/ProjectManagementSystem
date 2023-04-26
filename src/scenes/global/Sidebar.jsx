@@ -113,8 +113,40 @@ const Sidebar = () => {
             />
 
             <Item
+              title="Add Role"
+              to="/addRole"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
               title="Add Users"
               to="/addUsers"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Add Company"
+              to="/addCompany"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Add Project"
+              to="/addProject"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Add Module"
+              to="/addModule"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

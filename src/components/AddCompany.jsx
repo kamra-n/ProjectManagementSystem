@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  TextField,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-} from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -24,16 +16,16 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const AddUser = () => {
+const AddCompany = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
-    console.log("values", values);
+    console.log('values',values);
   };
+
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
-
+      <Header title="CREATE COMPANY" subtitle="Create a New Company" />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -42,9 +34,9 @@ const AddUser = () => {
         {({
           values,
           errors,
-          setFieldValue,
           touched,
           handleBlur,
+          setFieldValue,
           handleChange,
           handleSubmit,
         }) => (
@@ -57,6 +49,34 @@ const AddUser = () => {
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
             >
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.name}
+                name="name"
+                error={!!touched.name && !!errors.name}
+                helperText={touched.name && errors.name}
+                sx={{ gridColumn: "span 4" }}
+              />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Contact Person Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.cName}
+                name="cName"
+                error={!!touched.cName && !!errors.cName}
+                helperText={touched.cName && errors.cName}
+                sx={{ gridColumn: "span 4" }}
+              />
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -74,15 +94,30 @@ const AddUser = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Name"
+                label="Phone"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
-                name="name"
-                error={!!touched.name && !!errors.name}
-                helperText={touched.name && errors.name}
+                value={values.phone}
+                name="phone"
+                error={!!touched.phone && !!errors.phone}
+                helperText={touched.phone && errors.phone}
                 sx={{ gridColumn: "span 4" }}
               />
+
+              <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="WhatsApp Phone"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.wPhone}
+                name="wPhone"
+                error={!!touched.wPhone && !!errors.wPhone}
+                helperText={touched.phone && errors.wPhone}
+                sx={{ gridColumn: "span 4" }}
+              />
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -96,34 +131,22 @@ const AddUser = () => {
                 helperText={touched.address1 && errors.password}
                 sx={{ gridColumn: "span 4" }}
               />
-              <FormControl sx={{ gridColumn: "span 4" }}>
-                <InputLabel id="roleID">Role ID</InputLabel>
-                <Select
-                  labelId="roleID"
-                  id="roleid"
-                  name="roleId"
-                  label="roleID"
-                  onChange={handleChange}>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
+
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Phone"
+                label="URL"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.phone}
-                name="phone"
-                error={!!touched.phone && !!errors.phone}
-                helperText={touched.phone && errors.phone}
+                value={values.url}
+                name="url"
+                error={!!touched.url && !!errors.url}
+                helperText={touched.url && errors.url}
                 sx={{ gridColumn: "span 4" }}
               />
 
-           <Box sx={{ gridColumn: "span 4" }}>
+               <Box sx={{ gridColumn: "span 4" }}>
                 <div className="App">
                   <FilePond
                     files={values.file}
@@ -149,7 +172,7 @@ const AddUser = () => {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New User
+                Create New Company
               </Button>
             </Box>
           </form>
@@ -165,21 +188,25 @@ const phoneRegExp =
 const checkoutSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   name: yup.string().required("required"),
+  cName: yup.string().required("required"),
   password: yup.string().required("required").min(5),
-  phone: yup
-    .string()
+  phone: yup.string()
     .matches(phoneRegExp, "Phone number is not valid")
     .required("required"),
-  roleId: yup.string().required("required"),
+  wPhone: yup.string()
+    .matches(phoneRegExp, "Phone number is not valid")
+    .required("required"),
+  url: yup.string().required("required"),
   file: yup.mixed().required("File is required"),
 });
 const initialValues = {
-  email: "",
   name: "",
-  password: "",
-  roleId: "",
+  cName: "",
+  email: "",
   phone: "",
+  wPhone: "",
+  url: "",
   file: "",
 };
 
-export default AddUser;
+export default AddCompany;
