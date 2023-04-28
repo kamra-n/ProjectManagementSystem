@@ -8,7 +8,7 @@ const initialState = {
     isLoading: false,
     isAuth: false,
     token: '',
-    role: ''
+    role: '',
 };
 
 export const LoginHandler = createAsyncThunk(
@@ -26,6 +26,20 @@ export const LoginHandler = createAsyncThunk(
         }
     }
 )
+
+export const roleHandler = createAsyncThunk(
+    'role',async (values)=>{
+       try{
+        const res = await axiosInstance.post("/Roles/Add",values);
+        console.log(res)
+      }
+
+      catch(e){
+        console.log(e)
+      }
+    }
+)
+
 
 export const authSlice = createSlice({
     name: 'auth',

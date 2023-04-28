@@ -1,15 +1,27 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField,Modal } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../components/Header";
+import { Toaster } from "react-hot-toast";
+import { roleHandler } from "../store/Role";
+import { useSelector,useDispatch } from "react-redux/";
+
 
 const Role = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-
+  const dispatch = useDispatch();
+  const state = useSelector((state)=>state);
+  console.log('state',state);
   const handleFormSubmit = (values) => {
-    console.log('values',values);
+    const res = {
+      id:"",
+      roleName: values.roleTitle,
+      description: values.roleDescription
+    }
+    dispatch(roleHandler(res));
   };
+  
 
   return (
     <Box m="20px">
@@ -72,7 +84,13 @@ const Role = () => {
           </form>
         )}
       </Formik>
+
+      <Toaster
+    position="top-center"
+    reverseOrder={false}
+  />
     </Box>
+ 
   );
 };
 

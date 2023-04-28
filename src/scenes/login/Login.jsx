@@ -14,7 +14,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import LoadingButton from "@mui/lab/LoadingButton";
 import axiosInstance, { setToken } from "../../Interceptor/AXIOS";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import { useSelector,useDispatch } from "react-redux/";
 import { LoginHandler } from "../../store/Auth";
 
@@ -32,10 +31,12 @@ const Login = () => {
     setLoading(true);
     dispatch(LoginHandler(values))
     setTimeout(()=>{
-      if(Auth.isAuth){
-
-        navigate('/') 
-      }
+      // if(Auth.isAuth){
+      //   window.location.reload();
+      //   navigate('/') 
+      // }
+        window.location.reload();
+        navigate('/')
     },5000)
     // axiosInstance
     //   .post("/User/login", values)

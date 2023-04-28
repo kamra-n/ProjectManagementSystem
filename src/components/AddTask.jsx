@@ -30,21 +30,21 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const AddModule = () => {
+const AddTask = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
-    console.log("values", values);
+    console.log(values);
   };
 
   return (
     <Box m="20px">
-      <Header title="CREATE MODULE" subtitle="Create a New Module" />
+      <Header title="CREATE TASK" subtitle="Create a New Task" />
 
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        // validationSchema={checkoutSchema}
+      validationSchema={checkoutSchema}
       >
         {({
           values,
@@ -64,19 +64,22 @@ const AddModule = () => {
                 "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
               }}
             >
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Project ID"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.projectID}
-                name="projectID"
-                error={!!touched.projectID && !!errors.projectID}
-                helperText={touched.projectID && errors.projectID}
-                sx={{ gridColumn: "span 4" }}
-              />
+
+
+             <FormControl sx={{ gridColumn: "span 4" }}>
+              <InputLabel id="moduleID">Role ID</InputLabel>
+              <Select
+                labelId="moduleID"
+                id="moduleID"
+                name="moduleID"
+                label="moduleID"
+                onChange={handleChange}>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+
               <TextField
                 fullWidth
                 variant="filled"
@@ -103,6 +106,7 @@ const AddModule = () => {
                 helperText={touched.description && errors.description}
                 sx={{ gridColumn: "span 4" }}
               />
+
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
                   <DatePicker
@@ -128,7 +132,7 @@ const AddModule = () => {
                       setFieldValue("endingDate", value, true)
                     }
                     value={values.endingDate}
-                    name="startingDate"
+                    name="endingDate"
                     error={!!touched.endingDate && !!errors.endingDate}
                     helperText={touched.endingDate && errors.endingDate}
                   />
@@ -170,7 +174,7 @@ const AddModule = () => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.inHour}
-                name="InHours"
+                name="inHour"
                 error={!!touched.inHour && !!errors.inHour}
                 helperText={touched.inHour && errors.inHour}
                 sx={{ gridColumn: "span 4" }}
@@ -198,10 +202,9 @@ const AddModule = () => {
                 />
               </div>
             </Box>
-
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New Module{" "}
+                Create New Task{" "}
               </Button>
             </Box>
           </form>
@@ -215,26 +218,25 @@ const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const checkoutSchema = yup.object().shape({
-  email: yup.string().email("invalid email").required("required"),
-  name: yup.string().required("required"),
-  inHour: yup.string().required("required"),
-  projectID: yup.string().required("required"),
-  phone: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
+  title: yup.string().required("required"),
+  description: yup.string().required("required").min(5),
+  startingDate:yup.string().required("required"),
+  endingDate:yup.string().required("required"),
   assignTo: yup.string().required("required"),
   file: yup.mixed().required("File is required"),
+  inHour: yup.string().required("required"),
+
 });
 const initialValues = {
+  moduleID:"",
   title: "",
-  projectID: "",
   description: "",
   startingDate: "",
   endingDate: "",
+  file: "",
   assignTo: "",
   inHour: "",
-  file: "",
+ 
 };
 
-export default AddModule;
+export default AddTask;

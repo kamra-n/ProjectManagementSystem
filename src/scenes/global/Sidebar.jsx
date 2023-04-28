@@ -152,6 +152,30 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
+            <Item
+              title="Add Feature"
+              to="/addFeature"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Add Task"
+              to="/addTask"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
+              title="Add Status"
+              to="/addStatus"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
             <MenuItem
               style={{
                 color: colors.grey[100],
